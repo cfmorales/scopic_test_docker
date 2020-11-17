@@ -2,8 +2,11 @@
 
 This is the link for the Git repository of where the front-end and back-end of the project is located: https://github.com/cfmorales/scopic_test_docker
 
+- The folder 'vendor' also uploaded in the Laravel project so you may want to zip this folder before you download it
+- or
 - In your console, use this command to clone the Git repository:
   - git clone https://github.com/cfmorales/scopic_test_docker
+- The Api documentation is in this link https://web.postman.co/collections/13067023-fd88b890-8b99-420b-994d-a3cff9f5c98d?version=latest&workspace=d575ba5f-5af7-4b7b-8d2c-cc85f9ce9af2
 
 ## Setup docker for the Back End
 
