@@ -1,0 +1,43 @@
+<div class="card">
+  <form [formGroup]="adminSearchForm">
+    <div class="card-header justify-content-between d-flex">
+      <span>List of items</span>
+      <div class="col-md-6 input-group">
+        <input class="form-control" type="text" placeholder="Search by name" formControlName="name">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="adminSearch()">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col" colspan="3">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of listItems">
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
+          <td>
+            <button class="btn btn-sm btn-light" [routerLink]="['/auction/view-auction/',item.id]">View</button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-warning" [routerLink]="['/auction/update/',item.id]">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="delete(item.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

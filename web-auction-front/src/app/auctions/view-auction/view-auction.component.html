@@ -1,0 +1,72 @@
+<div *ngIf="item">
+  <div *ngIf="!auctionForm.valid && !auctionForm.disabled" class="alert alert-warning mt-2" role="alert">
+    Please provide a greater amount than {{bidValue}}
+  </div>
+  <div *ngIf="status" [className]="statusClass" class="" role="alert">
+    {{message}}
+  </div>
+  <div class="card mt-2">
+    <div class="card-header">
+      <a class="badge badge-info mt-2" routerLink="/auction">Return</a>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mb-4 text-center">
+          <img src="{{item.image_url}}" alt="img">
+        </div>
+        <div class="col-md-6">
+          <h3 class="card-title">{{item.name}}</h3>
+
+          <h5>This auction will end at:
+            {{item.auction_end}}
+
+          </h5>
+          <p class="pt-1">
+            Days left: {{timeLeft[0]}}, with
+            <countdown [config]="{leftTime: timeLeft[1]}"></countdown>
+          </p>
+          <p class="pt-1">
+            Description: {{item.description}}
+          </p>
+          <form [formGroup]="auctionForm" *ngIf="!itemOwner; else userInfo">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="col-form-label"> Make your bid:
+                  <input type="number" class="form-control" formControlName="bid"
+                         placeholder="Set Bid Value"></label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline-info" [disabled]="!auctionForm.valid" (click)="saveBid()">
+              Submit Bid
+            </button>
+          </form>
+          <ng-template #userInfo>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <p class="font-weight-normal">The user
+                  <span class="font-weight-bold">{{itemOwner.name | uppercase}}</span> won this auction</p>
+                <p class="font-weight-normal">The final price was
+                  <span class="font-weight-bold">{{bidHistory[0].bid | currency}}</span></p>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer" *ngIf="bidHistory">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <span class="text font-weight-bold">Bid history</span>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-12">
+          <div class="list-group">
+            <span class="list-group-item list-group-item-action" *ngFor="let bidHis of bidHistory">
+              {{bidHis.bid | currency}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

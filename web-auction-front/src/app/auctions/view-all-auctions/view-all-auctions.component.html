@@ -1,0 +1,31 @@
+<div class="row">
+
+  <div class="col-md-4" *ngFor="let auct of auctions | paginate:{
+  id: 'auctions_pagination',
+  itemsPerPage: 10,
+  currentPage: page,
+  totalItems: totalRecord
+  }">
+    <div class="card mb-4 box-shadow">
+      <img class="card-img-top" alt="{{auct.name}}" src="{{auct.image_url}}" data-holder-rendered="true">
+      <div class="card-body">
+        <span class="font-weight-bold">{{auct.name}}</span>
+        <p *ngIf="auct.bids[0]; else price">Price: {{auct.bids[0].bid}}</p>
+        <ng-template #price><p>Price: no bids yet</p>
+        </ng-template>
+        <p class="card-text text-truncate">{{auct.description}}</p>
+        <div class="d-flex">
+          <a type="button" [routerLink]="['view-auction/',auct.id]" class="btn btn-block btn-outline-secondary">Bid
+            Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="text-center col-md-12">
+    <pagination-controls id="auctions_pagination" maxSize="5" directionLinks="true"
+                         (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
